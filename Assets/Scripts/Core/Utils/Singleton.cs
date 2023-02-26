@@ -8,7 +8,7 @@ using UnityEngine;
 namespace CoronaStriker.Core.Utils
 {
     /// <summary>
-    /// 다른 클래스에서 정적 인스턴스 참조의 형태로 사용되는 객체들의 공통 클래스.
+    /// 메모리에 오직 한 개만 생성되는 정적 클래스들의 공통 클래스.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -19,7 +19,7 @@ namespace CoronaStriker.Core.Utils
         private static T instance = null;
 
         /// <summary>
-        /// Thread-Safe를 위한 
+        /// Thread-Safe를 위한 Locker.
         /// </summary>
         private static object locker = new object();
 
@@ -72,7 +72,7 @@ namespace CoronaStriker.Core.Utils
             isApplicationQuit = true;
         }
 
-        protected virtual void OnDestroy() 
+        protected virtual void OnDestroy()
         {
             isApplicationQuit = true;
         }
