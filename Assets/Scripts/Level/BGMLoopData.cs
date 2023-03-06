@@ -7,34 +7,10 @@ using UnityEngine;
 
 namespace CoronaStriker.Level
 {
-    public sealed record LoopData
-    {
-        public const float defaultLoopStart = 0.0f;
-        public const float defaultLoopEnd   = 1.0f;
-
-        /// <summary>
-        /// 재생할 BGM의 반복 재생 시작 구간.
-        /// </summary>
-        [Tooltip("재생할 BGM의 반복 재생 시작 구간.")]
-        public float loopStart;
-
-        /// <summary>
-        /// 재생할 BGM의 반복 재생 종료 구간.
-        /// </summary>
-        [Tooltip("재생할 BGM의 반복 재생 종료 구간.")]
-        public float loopEnd;
-
-        public LoopData(float _loopStart, float _loopEnd)
-        {
-            loopStart = _loopStart;
-            loopEnd = _loopEnd;
-        }
-    }
-
     /// <summary>
     /// BGM의 반복 재생을 위한 데이터들을 담고 있는 데이터 테이블.
     /// </summary>
-    [CreateAssetMenu(fileName = "New BGM Data", menuName = "Data Table", order = int.MaxValue)]
+    [CreateAssetMenu(fileName = "New BGM Data", menuName = "Data Table/BGM Loop Data", order = int.MaxValue)]
     public sealed class BGMLoopData : ScriptableObject, IEquatable<BGMLoopData>
     {
         /// <summary>
@@ -81,10 +57,10 @@ namespace CoronaStriker.Level
                   startFrom.Equals(other.startFrom) && loopStart.Equals(loopStart) && loopEnd.Equals(loopEnd);
         }
 
-        public override bool Equals(object other)
+        public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, other)) return false;
-            return other is BGMLoopData && Equals(other as BGMLoopData);
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is BGMLoopData && Equals(obj as BGMLoopData);
         }
 
         public override int GetHashCode()
@@ -96,6 +72,7 @@ namespace CoronaStriker.Level
                 hashCode = (hashCode * 397) ^ (!float.IsNaN(startFrom) ? startFrom.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (!float.IsNaN(loopStart) ? loopStart.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (!float.IsNaN(loopEnd) ? loopEnd.GetHashCode() : 0);
+
                 return hashCode;
             }
         }

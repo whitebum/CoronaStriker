@@ -9,5 +9,6 @@ namespace CoronaStriker.Level
     /// </summary>
     public sealed class GameManager : Singleton<GameManager>
     {
+        
     }
 }
